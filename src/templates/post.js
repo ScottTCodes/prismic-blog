@@ -59,56 +59,53 @@ export const query = graphql`
 `
 
 // Sort and display the different slice options
-const PostSlices = ({ slices }) =>
-  slices.map((slice, index) => {
-    const res = (() => {
-      switch (slice.slice_type) {
-        case 'text':
-          return (
-            <div key={index} className="homepage-slice-wrapper">
-              <Text slice={slice} />
-            </div>
-          )
+const PostSlices = ({ slices }) => slices.map((slice, index) => {
+  const res = (() => {
+    switch (slice.slice_type) {
+      case 'text':
+        return (
+          <div key={index} className="homepage-slice-wrapper">
+            <Text slice={slice} />
+          </div>
+        )
 
-        case 'quote':
-          return (
-            <div key={index} className="homepage-slice-wrapper">
-              <Quote slice={slice} />
-            </div>
-          )
+      case 'quote':
+        return (
+          <div key={index} className="homepage-slice-wrapper">
+            <Quote slice={slice} />
+          </div>
+        )
 
-        case 'image_with_caption':
-          return (
-            <div key={index} className="homepage-slice-wrapper">
-              <ImageCaption slice={slice} />
-            </div>
-          )
+      case 'image_with_caption':
+        return (
+          <div key={index} className="homepage-slice-wrapper">
+            <ImageCaption slice={slice} />
+          </div>
+        )
 
-        default:
-      }
-    })()
-    return res
-  })
+      default:
+    }
+  })()
+  return res
+})
 
 // Display the title, date, and content of the Post
-const PostBody = ({ blogPost }) => {
-  return (
-    <div>
-      <div className="container post-header">
-        <div className="back">
-          <Link to="/">back to list</Link>
-        </div>
-        <h1>
-          {RichText.asText(blogPost.title.raw).length !== 0
-            ? RichText.asText(blogPost.title.raw)
-            : 'Untitled'}
-        </h1>
+const PostBody = ({ blogPost }) => (
+  <div>
+    <div className="container post-header">
+      <div className="back">
+        <Link to="/">back to list</Link>
       </div>
-      {/* Go through the slices of the post and render the appropiate one */}
-      <PostSlices slices={blogPost.body} />
+      <h1>
+        {RichText.asText(blogPost.title.raw).length !== 0
+          ? RichText.asText(blogPost.title.raw)
+          : 'Untitled'}
+      </h1>
     </div>
-  )
-}
+    {/* Go through the slices of the post and render the appropiate one */}
+    <PostSlices slices={blogPost.body} />
+  </div>
+)
 
 export const Post = ({ data }) => {
   if (!data) return null

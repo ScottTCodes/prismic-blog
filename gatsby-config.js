@@ -11,6 +11,7 @@ const prismicReleaseID = process.env.PRISMIC_RELEASE_ID || releaseID
 
 const blogHomeSchema = require('./custom_types/bloghome.json')
 const postSchema = require('./custom_types/post.json')
+const flexibleContentSchema = require('./custom_types/flexiblecontent.json')
 
 const gastbySourcePrismicConfig = {
   resolve: 'gatsby-source-prismic',
@@ -23,6 +24,7 @@ const gastbySourcePrismicConfig = {
     schemas: {
       blogHome: blogHomeSchema,
       post: postSchema,
+      flexible_content: flexibleContentSchema,
     },
   },
 }

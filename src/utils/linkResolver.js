@@ -3,10 +3,14 @@
 // As your project grows, you should update this function according to your routes
 
 const linkResolver = (doc) => {
-  if (doc.type === 'post') {
-    return `/blog/${doc.uid}`
+  switch (doc.type) {
+    case 'post':
+      return `/blog/${doc.uid}`
+    case 'flexible_content':
+      return `/${doc.uid}`
+    default:
+      return '/'
   }
-  return '/'
 }
 
 module.exports = linkResolver
